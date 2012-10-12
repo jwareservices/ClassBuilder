@@ -29,7 +29,9 @@ import java.util.Map;
 
 
 /**
+ * 
  * A WORK IN PROGRESS.
+ * 
  * 
  * ClassBuilder is a simple tool used to create a template for
  * class and interfaces to be used in the Processing programming 
