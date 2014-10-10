@@ -123,7 +123,7 @@ public class ClassGenerator {
      * Sets the package name parameter at the top of the class file.
      * @param _packageName
      */
-    public void setPackage(String _packageName) {
+    public void setPackage(final String _packageName) {
         packageName.append("package").append(SPC)
                 .append(_packageName).append(SPC)
                 .append(EOL).append(NL).append(NL);
@@ -159,7 +159,8 @@ public class ClassGenerator {
      * @param superName
      * @param interfaceName
      */
-    public void setClassName (String access, String modifier, String name, String superName, String interfaceName) {
+    public void setClassName (final String access, final String modifier, final String name, 
+                                final String superName, final String interfaceName) {
 
         classAccess=access;
         classDef.append(classAccess);
@@ -195,7 +196,7 @@ public class ClassGenerator {
      * @param type
      * @param name
      */
-    public void createVariable(String access, String modifier , String type, String name) {
+    public void createVariable(final String access, final String modifier , final String type, final String name) {
         
         List<String> list = variablesMap.get(name);
         if (list == null)
@@ -231,7 +232,7 @@ public class ClassGenerator {
      * @param type
      * @param name
      */
-    public void createMethod(String access, String modifier, String type, String name) {
+    public void createMethod(final String access, final String modifier, final String type, final String name) {
         
         List<String> list = methodsMap.get(name);
         if (list == null)
