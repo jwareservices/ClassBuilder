@@ -45,7 +45,7 @@ import java.util.Map;
  * I'd like to ultimately make this an actual tool using the
  * tool interface from Processing. 
  * 
- * @author      Paul Jackson<jjacks55@email.cpcc.edu>
+ * @author      Paul Jackson<jwareservices@gmail.com>
  * @version     0.2 Beta, 08/17/2012
  * @since       0.1 build not released
  */
