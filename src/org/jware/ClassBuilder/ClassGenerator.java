@@ -88,7 +88,7 @@ public class ClassGenerator {
           
     /**
      * Allocates the maps that contain the methods and variables
-     * the class.
+     * of the class.
      */
     public void createLists() {
         variablesMap = new HashMap<>();
