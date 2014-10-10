@@ -1,9 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.jware.ClassBuilder;
+
+/*
+ * Copyright (C) 2014 J. Paul Jackson <jwareservices@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -16,76 +28,82 @@ import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+
 /**
+ * File: ClassBuilder.java Created: 08/17/2012
  *
- * @author Paul Jackson<jjacks@email.cpcc.edu>
+ * @author J. Paul Jackson <jwareservices@gmail.com>
+ *
  */
 public class ClassBuilder extends javax.swing.JFrame {
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
     ClassGenerator classGenerator;
+
     /**
      * Creates new form ClassBuilder
      */
-    
- //   String className="";
-    
+    //   String className="";
     public ClassBuilder() {
         classGenerator = new ClassGenerator();
         classGenerator.createLists();
-        
+
         initComponents();
     }
-    
+
     private void generate() {
-        StringBuilder sb=new StringBuilder();     
+        StringBuilder sb = new StringBuilder();
         String classAccess;
 
         sb.append("");
         if (publicAccessRadio.isSelected()) {
-            classAccess=publicAccessRadio.getText().toLowerCase();
-        } else 
-            classAccess=privateAccessRadio.getText().toLowerCase();
-        
+            classAccess = publicAccessRadio.getText().toLowerCase();
+        } else {
+            classAccess = privateAccessRadio.getText().toLowerCase();
+        }
+
         if (abstractModifierCheck.isSelected()) {
-           sb.append(abstractModifierCheck.getText().toLowerCase()).append(" ");
+            sb.append(abstractModifierCheck.getText().toLowerCase()).append(" ");
         }
         if (finalModifierCheck.isSelected()) {
-           sb.append(finalModifierCheck.getText().toLowerCase()).append(" ");
+            sb.append(finalModifierCheck.getText().toLowerCase()).append(" ");
         }
         if (staticModfierCheck.isSelected()) {
-           sb.append(staticModfierCheck.getText().toLowerCase()).append(" ");
+            sb.append(staticModfierCheck.getText().toLowerCase()).append(" ");
         }
-        
-        String packageN=packageNameText.getText();
-        if(!"".equals(packageN))
+
+        String packageN = packageNameText.getText();
+        if (!"".equals(packageN)) {
             classGenerator.setPackage(packageN);
-        
-        String className=classNameTextField.getText();
-        String classSuperName=superClassTextBox.getText();
-        String interfaceName=interfaceTextBox.getText();
-        classGenerator.setClassName(classAccess, sb.toString(), className, classSuperName, interfaceName); 
-        
-        for (int row=0; row<variablesTable.getModel().getRowCount();row++) {
-                String varAccess=(String)variablesTable.getValueAt(row, 0);
-                String varModifier=(String)variablesTable.getValueAt(row, 1);
-                if ("default".equals(varModifier)) 
-                    varModifier="";
-                String varType=(String)variablesTable.getValueAt(row, 2);
-                String varName=(String)variablesTable.getValueAt(row, 3);
-                classGenerator.createVariable(varAccess, varModifier, varType, varName);
         }
-         for (int row=0; row<methodTable.getModel().getRowCount();row++) {
-                String methodAccess=(String)methodTable.getValueAt(row, 0);
-                String methodModifier=(String)methodTable.getValueAt(row, 1);
-                if ("default".equals(methodModifier)) 
-                    methodModifier="";
-                String methodType=(String)methodTable.getValueAt(row, 2);
-                String methodName=(String)methodTable.getValueAt(row, 3);
-                classGenerator.createMethod(methodAccess, methodModifier, methodType, methodName);
+
+        String className = classNameTextField.getText();
+        String classSuperName = superClassTextBox.getText();
+        String interfaceName = interfaceTextBox.getText();
+        classGenerator.setClassName(classAccess, sb.toString(), className, classSuperName, interfaceName);
+
+        for (int row = 0; row < variablesTable.getModel().getRowCount(); row++) {
+            String varAccess = (String) variablesTable.getValueAt(row, 0);
+            String varModifier = (String) variablesTable.getValueAt(row, 1);
+            if ("default".equals(varModifier)) {
+                varModifier = "";
+            }
+            String varType = (String) variablesTable.getValueAt(row, 2);
+            String varName = (String) variablesTable.getValueAt(row, 3);
+            classGenerator.createVariable(varAccess, varModifier, varType, varName);
+        }
+        for (int row = 0; row < methodTable.getModel().getRowCount(); row++) {
+            String methodAccess = (String) methodTable.getValueAt(row, 0);
+            String methodModifier = (String) methodTable.getValueAt(row, 1);
+            if ("default".equals(methodModifier)) {
+                methodModifier = "";
+            }
+            String methodType = (String) methodTable.getValueAt(row, 2);
+            String methodName = (String) methodTable.getValueAt(row, 3);
+            classGenerator.createMethod(methodAccess, methodModifier, methodType, methodName);
         }
         classGenerator.generateClass();
-        
+
     }
 
     /**
@@ -635,16 +653,17 @@ public class ClassBuilder extends javax.swing.JFrame {
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
 
         // Initialized from the UI above.
-        String cName=classNameTextField.getText();
+        String cName = classNameTextField.getText();
         File file;
         // This is a utility method called above to create the file data.
         generate();
         // If the className has not been initialized then use the 'Temp' name.
-        if(!"".equals(cName)) {
-            file = new File(cName+".java");
-        } else 
+        if (!"".equals(cName)) {
+            file = new File(cName + ".java");
+        } else {
             file = new File("Temp.java");
-        
+        }
+
         // Set the file name in UI file name field. 
         fileChooser.setSelectedFile(file);
         // Display the save dialog.
@@ -657,13 +676,13 @@ public class ClassBuilder extends javax.swing.JFrame {
             Path path = file.toPath();
             // Get the data, write it out 
             byte[] buf = classGenerator.getClassDef().getBytes();
-            try{ 
-                Files.write(path, buf,StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING); 
+            try {
+                Files.write(path, buf, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
                 System.out.println("Saving: " + file.getName() + ".");
-            } catch(IOException e){
+            } catch (IOException e) {
                 System.out.println("Error. " + e);
             }
-         }
+        }
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void generateGetSetCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateGetSetCheckActionPerformed
@@ -671,21 +690,19 @@ public class ClassBuilder extends javax.swing.JFrame {
     }//GEN-LAST:event_generateGetSetCheckActionPerformed
 
     private void removeVariableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeVariableButtonActionPerformed
-
     }//GEN-LAST:event_removeVariableButtonActionPerformed
 
     private void removeMethodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMethodButtonActionPerformed
-
     }//GEN-LAST:event_removeMethodButtonActionPerformed
 
     private void addMethodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMethodButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) methodTable.getModel();
-        model.addRow(new Object[]{" ", " ", " "," "});
+        model.addRow(new Object[]{" ", " ", " ", " "});
     }//GEN-LAST:event_addMethodButtonActionPerformed
 
     private void addVariableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVariableButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) variablesTable.getModel();
-        model.addRow(new Object[]{" ", " ", " "," "});
+        model.addRow(new Object[]{" ", " ", " ", " "});
     }//GEN-LAST:event_addVariableButtonActionPerformed
 
     private void constructorFromSuperCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constructorFromSuperCheckBoxActionPerformed
@@ -714,11 +731,11 @@ public class ClassBuilder extends javax.swing.JFrame {
 
     private void toScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toScreenButtonActionPerformed
 
-    jFrame1.pack();
-    jFrame1.setVisible(true);
-    generate();
-    displayTextArea.setText(classGenerator.getClassDef());
-    
+        jFrame1.pack();
+        jFrame1.setVisible(true);
+        generate();
+        displayTextArea.setText(classGenerator.getClassDef());
+
         }//GEN-LAST:event_toScreenButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
