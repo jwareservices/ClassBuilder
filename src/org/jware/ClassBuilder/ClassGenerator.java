@@ -1,3 +1,5 @@
+package org.jware.ClassBuilder;
+
 /*
   The JWare Public Access Project - http://jware.public.org
 
@@ -19,7 +21,6 @@
   Boston, MA  02111-1307  USA
 */
 
-package org.jware.ClassBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
